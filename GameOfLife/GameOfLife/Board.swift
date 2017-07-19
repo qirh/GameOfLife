@@ -37,15 +37,17 @@ class Board: LifeDataSource{
     
     //  information about multi-dimenonsonal arryas obtained from here:
     //  http://dev.iachieved.it/iachievedit/multidimensional-arrays-in-swift/
-    private var previousGrid = [[CellState]](repeating: [CellState](repeating: .Empty, count: 24), count: 24)
-    private var grid: [[CellState]]
     let generation: Int
     let size: Int
+    private var previousGrid: [[CellState]]
+    private var grid: [[CellState]]
+    
     
     init(generation: Int = 0, size: Int = 24, defaultState: CellState = .Empty){
         self.generation = generation
         self.size = size
-        grid = [[CellState]](repeating: [CellState](repeating: defaultState, count: size), count: size)
+        grid = [[CellState]](repeating: [CellState](repeating: defaultState, count: self.size), count: self.size)
+        previousGrid = [[CellState]](repeating: [CellState](repeating: defaultState, count: self.size), count: self.size)
     }
     
     func countNeighborsWithToroidTopology(p: CellPoint) -> Int {
