@@ -26,9 +26,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLD-7j-OYg" customClass="GridView" customModule="GameOfLife" customModuleProvider="target">
                                 <rect key="frame" x="21" y="25" width="333" height="333"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xLD-7j-OYg" secondAttribute="height" multiplier="1:1" id="OMr-A5-D49"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="YDf-t7-pLs" appends="YES" id="KRg-6a-jX3"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HiG-qZ-ZnX">
                                 <rect key="frame" x="21" y="363" width="333" height="299"/>
@@ -159,11 +163,17 @@
                         <outlet property="sliderFrames" destination="KWF-yW-7RH" id="REk-xl-Ldw"/>
                         <outlet property="sliderSize" destination="xqL-UX-uKI" id="HBO-8K-aU2"/>
                         <outlet property="switchPlay" destination="9Ze-e6-bWF" id="PW4-17-QUs"/>
+                        <outlet property="tapGesture" destination="YDf-t7-pLs" id="LIp-P6-SIk"/>
                         <outlet property="viewControls" destination="HiG-qZ-ZnX" id="9e6-HM-FIO"/>
                         <outlet property="viewGrid" destination="xLD-7j-OYg" id="Oal-jF-iUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="YDf-t7-pLs">
+                    <connections>
+                        <action selector="tapGestureRecognizer:" destination="BYZ-38-t0r" id="SkO-0h-P2h"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
