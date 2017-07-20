@@ -41,7 +41,7 @@ class GameOfLifeVC: UIViewController {
         view.addSubview(viewGrid)
         
         labelGeneration.text = "Generation:"
-        labelGenerationNumber.text = "0"
+        labelGenerationNumber.text = "\(viewGrid.getGeneration())"
         labelGenerationNumber.textAlignment = NSTextAlignment.center;
         switchPlay.setOn(false, animated: false)
         
@@ -61,7 +61,10 @@ class GameOfLifeVC: UIViewController {
         sliderSize.minimumValue = Float(viewGrid.getMinSize())
         sliderSize.maximumValue = Float(viewGrid.getMaxSize())
         sliderSize.value = Float(viewGrid.getSize())
-        sliderSize.isContinuous = false
+        
+        // source:
+        // https://stackoverflow.com/a/9391141
+        sliderSize.isContinuous = true
         
         labelSizeNumber.text = "\(viewGrid.getSize())"
         labelSizeNumber.textAlignment = NSTextAlignment.center
@@ -83,8 +86,9 @@ class GameOfLifeVC: UIViewController {
         labelFramesNumber.text = "\(sliderValueInt)"
         viewGrid.setFrameNumber(frames: sliderValueInt)
         
+        // source:
+        // https://www.weheartswift.com/nstimer-in-swift/
         if(timer.isValid){
-            
             timer.invalidate()
             timer = Timer.scheduledTimer(timeInterval: 1.0/Double(sliderFrames.value), target: self, selector: #selector(GameOfLifeVC.countUp), userInfo: nil, repeats: true)
         }
@@ -99,31 +103,30 @@ class GameOfLifeVC: UIViewController {
         
         let sliderValueInt = Int(sliderValueFloat)
         labelSizeNumber.text = "\(sliderValueInt)"
-        viewGrid.resetGrid(size: sliderValueInt)
-        
         
     }
     @IBAction func switchPlayPressed(_ sender: UISwitch) {
         play = switchPlay.isOn
-        buttonReset.isEnabled = !play
         sliderSize.isEnabled = !play
         if(play){
             timer = Timer.scheduledTimer(timeInterval: 1.0/Double(sliderFrames.value), target: self, selector: #selector(GameOfLifeVC.countUp), userInfo: nil, repeats: true)
         }
         else{
-            
             timer.invalidate()
         }
         
         
     }
     func countUp() {
-        
         viewGrid.play()
         labelGenerationNumber.text = "\(viewGrid.getGeneration())"
     }
     @IBAction func buttonResetPressed(_ sender: UIButton) {
+        switchPlay.isOn = false
+        switchPlayPressed(switchPlay)
         viewGrid.resetGrid(size: Int(Float(lroundf(sliderSize.value))))
+        labelGenerationNumber.text = "\(viewGrid.getGeneration())"
+        labelSizeNumber.text = "\(viewGrid.getSize())"
     }
     
     @IBAction func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
@@ -137,10 +140,6 @@ class GameOfLifeVC: UIViewController {
         }
         
     }
-    
-    
-    
-    
 
 }
 
