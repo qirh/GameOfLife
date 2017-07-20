@@ -38,16 +38,18 @@ class Board: LifeDataSource{
     //  information about multi-dimenonsonal arryas obtained from here:
     //  http://dev.iachieved.it/iachievedit/multidimensional-arrays-in-swift/
     let generation: Int
-    let size: Int
+    var size: Int
     private var previousGrid: [[CellState]]
     private var grid: [[CellState]]
     
+    let MAXSIZE = 100
+    let MINSIZE = 5
     
-    init(generation: Int = 0, size: Int = 24, defaultState: CellState = .Empty){
-        self.generation = generation
-        self.size = size
-        grid = [[CellState]](repeating: [CellState](repeating: defaultState, count: self.size), count: self.size)
-        previousGrid = [[CellState]](repeating: [CellState](repeating: defaultState, count: self.size), count: self.size)
+    init(generationInput: Int = 0, size sizeInput: Int, defaultState: CellState = .Empty){
+        generation = generationInput
+        size = sizeInput
+        grid = [[CellState]](repeating: [CellState](repeating: defaultState, count: size), count: size)
+        previousGrid = [[CellState]](repeating: [CellState](repeating: defaultState, count: size), count: size)
     }
     
     func countNeighborsWithToroidTopology(p: CellPoint) -> Int {
@@ -82,6 +84,14 @@ class Board: LifeDataSource{
     }
     func moveToNextGeneration() {
         //add game of life
+    }
+    func getSize() -> Int {
+        return size
+    }
+    func setsize(size: Int) {
+        if(size <= MAXSIZE && size >= MINSIZE){
+            self.size = size
+        }
     }
 
 }
