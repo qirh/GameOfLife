@@ -10,13 +10,13 @@ Notes:
 
 Extras (* = done, ** = not done):
 		* Added three experimental configurations in the shape of buttons.
-		** Force touch
+		** Force touch, still working on it
 
 Graduate Credit (* = done, ** = not done):
 		* Variable size from 8 until 70. (Arbitrary values).
 
 Insane (* = done, ** = working on it):
-		These are the ones that I wanted to work on, but couldn't do them in time:
+		I started working on optimization and improved the speed of my program significantly, however, it is still hogging memory. these are the improvements that I wanted to work on, but couldn't do them in time:
 			** Implement a landscape orientation as well.
 			** Look up NSCoder, use it to persist the current state of your simulation to disk, and bring it back on startup.
 			** Optimize calculation by avoiding recalculation of dead zones.
