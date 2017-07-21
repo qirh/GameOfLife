@@ -44,12 +44,11 @@ class GridView: UIView {
         viewWidth = self.frame.size.width
         cellWidth = Double(viewWidth) / Double(getSize())
         
-        self.backgroundColor = UIColor.yellow
+        self.backgroundColor = UIColor.lightGray
         
         let shapeLayerLines = CAShapeLayer()
         shapeLayerLines.path = createBezierPathLines().cgPath
         shapeLayerLines.strokeColor = UIColor.blue.cgColor
-        shapeLayerLines.fillColor = UIColor.white.cgColor
         shapeLayerLines.lineWidth = 1.0
         shapeLayerLines.position = CGPoint(x: 0, y: 0)
         self.layer.addSublayer(shapeLayerLines)
@@ -61,11 +60,17 @@ class GridView: UIView {
             let shapeLayerRect = CAShapeLayer()
             shapeLayerRect.path = paths[i].cgPath
             
-            if(cellStates[i] == .Alive || cellStates[i] == .Born){
-                shapeLayerRect.fillColor = UIColor.green.cgColor
+            if(cellStates[i] == .Alive){
+                shapeLayerRect.fillColor = board.getColor(cellState: .Alive).cgColor
+            }
+            else if (cellStates[i] == .Born){
+                shapeLayerRect.fillColor = board.getColor(cellState: .Born).cgColor
+            }
+            else if (cellStates[i] == .Died){
+                shapeLayerRect.fillColor = board.getColor(cellState: .Died).cgColor
             }
             else{
-                shapeLayerRect.fillColor = UIColor.black.cgColor
+                shapeLayerRect.fillColor = board.getColor(cellState: .Empty).cgColor
             }
             
             shapeLayerRect.lineWidth = 1.0
@@ -138,6 +143,10 @@ class GridView: UIView {
         }
         pressedCell(x: x, y: y)
     }
+    func pressedCell(x: Int, y: Int) {
+        board.pressedCell(point: CellPoint(row: y, col: x))
+        drawGrid()
+    }
     func getMinSize() -> Int {
         return board.MINSIZE
     }
@@ -153,13 +162,9 @@ class GridView: UIView {
     func getGeneration() -> Int {
         return board.getGeneration()
     }
-    func pressedCell(x: Int, y: Int) {
-        board.pressedCell(point: CellPoint(row: y, col: x))
-        drawGrid()
-    }
+    
     func resetGrid(size: Int){
         board = Board(size: size)
-        
         self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         drawGrid()
     }
@@ -167,5 +172,15 @@ class GridView: UIView {
         board.moveToNextGeneration()
         drawGrid()
     }
-    
+    func getColor(cellState: CellState) -> UIColor {
+        return board.getColor(cellState: cellState)
+    }
+    func setAllCellsAlive() {
+        board.setAllCells(toState: .Born)
+        drawGrid()
+    }
+    func setChessBoard() {
+        board.setChess()
+        drawGrid()
+    }
 }
