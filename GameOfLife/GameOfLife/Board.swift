@@ -106,7 +106,7 @@ class Board: LifeDataSource{
         return grid[point.col][point.row]
     }
     func setCellAt(point: CellPoint, toState: CellState) {
-        print("col: \(point.row). col: \(point.col). state: \(toState)")
+        
         grid[point.col][point.row] = toState
     }
     func setAllCells(toState: CellState) {
@@ -197,11 +197,15 @@ class Board: LifeDataSource{
     }
     private func copyGrid(){
 
+        previousGrid = grid
+    }
+    func compareBoards() -> Bool{
         for i in 0..<size{
-            for j in 0..<size{
-                previousGrid[i][j] = grid[i][j]
+            if grid[i] != previousGrid[i]{
+                return false
             }
         }
+        return true
     }
     func getColor(cellState: CellState) -> UIColor {
         return colors[cellState]!

@@ -139,10 +139,6 @@ class GameOfLifeVC: UIViewController {
             timer.invalidate()
             timer = Timer.scheduledTimer(timeInterval: 1.0/Double(sliderFrames.value), target: self, selector: #selector(GameOfLifeVC.countUp), userInfo: nil, repeats: true)
         }
-        else{
-            
-        }
-        
     }
     @IBAction func sliderSizeChanged(_ sender: UISlider) {
         let sliderValueFloat = Float(lroundf(sliderSize.value))
@@ -205,7 +201,7 @@ class GameOfLifeVC: UIViewController {
     // https://www.raywenderlich.com/76020/using-uigesturerecognizer-with-swift-tutorial
     // and https://blog.apoorvmote.com/uipangesturerecognizer-to-make-draggable-uiview-in-ios-swift/
     @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
-        print("2")
+        
         
         if(switchPlay.isOn){}
         else{

@@ -18,6 +18,8 @@ class GridView: UIView {
     
     private var viewWidth: CGFloat = 0
     private var cellWidth: Double = 0
+    
+    private var first = true
 
     required init?(coder decoder: NSCoder) {
         
@@ -26,7 +28,7 @@ class GridView: UIView {
         
         super.init(coder: decoder)
         
-        drawGrid()
+        drawHelper()
     }
     
     func getFrameNumber() -> Int {
@@ -37,10 +39,25 @@ class GridView: UIView {
             self.frameNumber = frames
         }
     }
+    func drawHelper(){
+        if(first){
+            print("first")
+            drawGrid()
+        }
+        else if(!board.compareBoards()){
+            print("draw")
+            drawGrid()
+        }
+        else{
+            print("skip")
+        }
+        first = false
+    }
     
     // a lot of credit goes to this answer on stack overflow
     // https://stackoverflow.com/a/34659468
     func drawGrid() {
+        
         viewWidth = self.frame.size.width
         cellWidth = Double(viewWidth) / Double(getSize())
         
@@ -100,7 +117,6 @@ class GridView: UIView {
         for i in 0..<(getSize()+1){
             // starting point top left
             path.move(to: CGPoint(x: Double(i)*cellWidth, y: 0))
-            
             path.addLine(to: CGPoint(x: CGFloat(Double(i)*cellWidth), y: viewWidth))
         }
         return path
@@ -143,28 +159,30 @@ class GridView: UIView {
     }
     
     func resetGrid(size: Int){
+        first = true
         board = Board(size: size)
         self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        drawGrid()
+        
+        drawHelper()
     }
     func play(){
         board.moveToNextGeneration()
-        drawGrid()
+        drawHelper()
     }
     func getColor(cellState: CellState) -> UIColor {
         return board.getColor(cellState: cellState)
     }
     func setAllCellsAlive() {
         board.setAllCells(toState: .Born)
-        drawGrid()
+        drawHelper()
     }
     func setChessBoard() {
         board.setChess()
-        drawGrid()
+        drawHelper()
     }
     func setXBoard() {
         board.setX()
-        drawGrid()
+        drawHelper()
     }
     func getCellState(point: CGPoint) -> CellState {
         var x = 0, y = 0
@@ -186,7 +204,7 @@ class GridView: UIView {
         return board.cellStateAt(point: point)
     }
     func pressAT(point: CGPoint) {
-        print("pressAT")
+        
         var x = 0, y = 0
         
         for i in 0..<(getSize()+1){
@@ -202,7 +220,7 @@ class GridView: UIView {
             }
         }
         board.pressedCell(point: CellPoint(row: y, col: x))
-        drawGrid()
+        drawHelper()
     }
     func setCellAt(point: CGPoint, toState: CellState) {
         
@@ -221,13 +239,11 @@ class GridView: UIView {
                 break
             }
         }
-        if(board.cellStateAt(point: CellPoint(row: y, col: x)) == toState){
-            print("skip")
-        }
+        if(board.cellStateAt(point: CellPoint(row: y, col: x)) == toState){}
+            
         else{
-            print("setCellAt --> \(toState)")
             board.setCellAt(point: CellPoint(row: y, col: x), toState: toState)
-            drawGrid()
+            drawHelper()
         }
         
     }
