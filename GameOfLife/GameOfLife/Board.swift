@@ -44,7 +44,7 @@ class Board: LifeDataSource{
     private var previousGrid: [[CellState]]
     private var grid: [[CellState]]
     
-    private let colors: [CellState: UIColor]  = [.Alive: UIColor.green, .Born: UIColor.cyan, .Died: UIColor.orange, .Empty: UIColor.black]
+    private let colors: [CellState: UIColor]  = [.Alive: UIColor.green, .Born: UIColor.cyan.darker()!, .Died: UIColor.orange, .Empty: UIColor.black]
     
     let MAXSIZE = 70
     let MINSIZE = 8
@@ -106,12 +106,12 @@ class Board: LifeDataSource{
         return grid[point.col][point.row]
     }
     func setCellAt(point: CellPoint, toState: CellState) {
+        print("col: \(point.row). col: \(point.col). state: \(toState)")
         grid[point.col][point.row] = toState
     }
     func setAllCells(toState: CellState) {
         for i in 0..<size{
             for j in 0..<size{
-                print("i = \(i). j = \(j)")
                 grid[i][j] = toState
             }
         }
@@ -128,9 +128,17 @@ class Board: LifeDataSource{
             }
         }
     }
+    func setX() {
+        for i in 0..<size{
+            for j in 0..<size{
+                if(j == i || i+j == size-1){
+                    grid[i][j] = .Born
+                }
+            }
+        }
+    }
     func getStates() -> [CellState]{
         var states = [CellState]()
-        
         for i in 0..<size{
             for j in 0..<size{
                 
@@ -140,13 +148,13 @@ class Board: LifeDataSource{
         
         return states
     }
+    
     func moveToNextGeneration() {
         copyGrid()
         
         for i in 0..<size{
             for j in 0..<size{
                 let neighborCount = countNeighborsWithToroidTopology(point: CellPoint(i,j))
-                
                 
                 if(grid[i][j] == .Alive || grid[i][j] == .Born){
                     if(neighborCount < 2 || neighborCount > 3){
@@ -156,9 +164,6 @@ class Board: LifeDataSource{
                     else if(neighborCount == 2 || neighborCount == 3){
                         
                         grid[i][j] = .Alive
-                    }
-                    else{
-                        
                     }
                 }
                 else{
@@ -171,7 +176,6 @@ class Board: LifeDataSource{
                 }
             }
         }
-        
         increaseGeneration()
     }
     func getSize() -> Int {
@@ -192,6 +196,7 @@ class Board: LifeDataSource{
         self.generation += by
     }
     private func copyGrid(){
+
         for i in 0..<size{
             for j in 0..<size{
                 previousGrid[i][j] = grid[i][j]
