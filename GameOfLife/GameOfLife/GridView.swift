@@ -55,6 +55,7 @@ class GridView: UIView {
         
         let paths = createBezierPathRect()
         let cellStates = board.getStates()
+        
         for i in 0..<paths.count {
             
             let shapeLayerRect = CAShapeLayer()
@@ -125,28 +126,6 @@ class GridView: UIView {
     func getCellWidth() -> Double {
         return Double(cellWidth)
     }
-    
-    func pressAT(point: CGPoint) {
-        var x = 0, y = 0
-        
-        for i in 0..<(getSize()+1){
-            if(Double(i)*cellWidth > Double(point.x)){
-                x = i-1
-                break
-            }
-        }
-        for i in 0..<(getSize()+1){
-            if(Double(i)*cellWidth > Double(point.y)){
-                y = i-1
-                break
-            }
-        }
-        pressedCell(x: x, y: y)
-    }
-    func pressedCell(x: Int, y: Int) {
-        board.pressedCell(point: CellPoint(row: y, col: x))
-        drawGrid()
-    }
     func getMinSize() -> Int {
         return board.MINSIZE
     }
@@ -182,5 +161,74 @@ class GridView: UIView {
     func setChessBoard() {
         board.setChess()
         drawGrid()
+    }
+    func setXBoard() {
+        board.setX()
+        drawGrid()
+    }
+    func getCellState(point: CGPoint) -> CellState {
+        var x = 0, y = 0
+        
+        for i in 0..<(getSize()+1){
+            if(Double(i)*cellWidth > Double(point.x)){
+                x = i-1
+                break
+            }
+        }
+        for i in 0..<(getSize()+1){
+            if(Double(i)*cellWidth > Double(point.y)){
+                y = i-1
+                break
+            }
+        }
+        let point: CellPoint = CellPoint(x,y)
+        
+        return board.cellStateAt(point: point)
+    }
+    func pressAT(point: CGPoint) {
+        print("pressAT")
+        var x = 0, y = 0
+        
+        for i in 0..<(getSize()+1){
+            if(Double(i)*cellWidth > Double(point.x)){
+                x = i-1
+                break
+            }
+        }
+        for i in 0..<(getSize()+1){
+            if(Double(i)*cellWidth > Double(point.y)){
+                y = i-1
+                break
+            }
+        }
+        board.pressedCell(point: CellPoint(row: y, col: x))
+        drawGrid()
+    }
+    func setCellAt(point: CGPoint, toState: CellState) {
+        
+        
+        var x = 0, y = 0
+        
+        for i in 0..<(getSize()+1){
+            if(Double(i)*cellWidth > Double(point.x)){
+                x = i-1
+                break
+            }
+        }
+        for i in 0..<(getSize()+1){
+            if(Double(i)*cellWidth > Double(point.y)){
+                y = i-1
+                break
+            }
+        }
+        if(board.cellStateAt(point: CellPoint(row: y, col: x)) == toState){
+            print("skip")
+        }
+        else{
+            print("setCellAt --> \(toState)")
+            board.setCellAt(point: CellPoint(row: y, col: x), toState: toState)
+            drawGrid()
+        }
+        
     }
 }

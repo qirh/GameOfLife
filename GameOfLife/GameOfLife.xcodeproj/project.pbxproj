@@ -17,6 +17,7 @@
 		305ECB851F1FEE4200913B26 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ECB841F1FEE4200913B26 /* GridView.swift */; };
 		30AE628D1F1F157600425FC0 /* HelperCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AE628C1F1F157600425FC0 /* HelperCode.swift */; };
 		30AE628F1F1F15A600425FC0 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AE628E1F1F15A600425FC0 /* Board.swift */; };
+		30CBA67D1F21A1A600FFB645 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CBA67C1F21A1A600FFB645 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		305ECB841F1FEE4200913B26 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		30AE628C1F1F157600425FC0 /* HelperCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperCode.swift; sourceTree = "<group>"; };
 		30AE628E1F1F15A600425FC0 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		30CBA67C1F21A1A600FFB645 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				303C80BE1F1C40D900B7C0AB /* AppDelegate.swift */,
 				303C80C01F1C40D900B7C0AB /* GameOfLifeVC.swift */,
 				303C80C21F1C40D900B7C0AB /* Main.storyboard */,
+				30CBA67C1F21A1A600FFB645 /* Util.swift */,
 				305ECB841F1FEE4200913B26 /* GridView.swift */,
 				303C80C51F1C40D900B7C0AB /* Assets.xcassets */,
 				303C80C71F1C40D900B7C0AB /* LaunchScreen.storyboard */,
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				303C80C11F1C40D900B7C0AB /* GameOfLifeVC.swift in Sources */,
+				30CBA67D1F21A1A600FFB645 /* Util.swift in Sources */,
 				303C80BF1F1C40D900B7C0AB /* AppDelegate.swift in Sources */,
 				30AE628F1F1F15A600425FC0 /* Board.swift in Sources */,
 				305ECB851F1FEE4200913B26 /* GridView.swift in Sources */,

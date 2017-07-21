@@ -8,11 +8,13 @@
 
 import UIKit
 
+
+
 class GameOfLifeVC: UIViewController {
     
     var play: Bool = false
     var timer = Timer()
-    
+    var pressedCellState: CellState = .Empty
 
     @IBOutlet weak var viewGrid: GridView!
     @IBOutlet weak var viewControls: UIView!
@@ -31,14 +33,15 @@ class GameOfLifeVC: UIViewController {
     @IBOutlet weak var labelSizeNumber: UILabel!
     
     @IBOutlet weak var labelExperimental: UILabel!
-    
     @IBOutlet weak var buttonAlive: UIButton!
     @IBOutlet weak var buttonChess: UIButton!
+    @IBOutlet weak var buttonX: UIButton!
+    
     
     @IBOutlet weak var labelInfo: UILabel!
     
-
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var panGesture: UIPanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,16 +100,23 @@ class GameOfLifeVC: UIViewController {
         labelExperimental.text = "Experimental:"
         
         buttonAlive.setTitle("  All Alive!  ", for: .normal)
-        buttonAlive.setTitleColor(.green, for: .normal)
+        buttonAlive.setTitleColor(UIColor.green.darker(), for: .normal)
         buttonAlive.layer.cornerRadius = 5
         buttonAlive.layer.borderWidth = 0.5
         buttonAlive.layer.borderColor = UIColor.black.cgColor
         
         buttonChess.setTitle("  Chess  ", for: .normal)
-        buttonChess.setTitleColor(.green, for: .normal)
+        buttonChess.setTitleColor(UIColor.green.darker(), for: .normal)
         buttonChess.layer.cornerRadius = 5
         buttonChess.layer.borderWidth = 0.5
         buttonChess.layer.borderColor = UIColor.black.cgColor
+        
+        buttonX.setTitle("  X  ", for: .normal)
+        buttonX.setTitleColor(UIColor.green.darker(), for: .normal)
+        buttonX.layer.cornerRadius = 5
+        buttonX.layer.borderWidth = 0.5
+        buttonX.layer.borderColor = UIColor.black.cgColor
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -147,6 +157,7 @@ class GameOfLifeVC: UIViewController {
         sliderSize.isEnabled = !play
         buttonChess.isEnabled = !play
         buttonAlive.isEnabled = !play
+        buttonX.isEnabled = !play
         if(play){
             timer = Timer.scheduledTimer(timeInterval: 1.0/Double(sliderFrames.value), target: self, selector: #selector(GameOfLifeVC.countUp), userInfo: nil, repeats: true)
         }
@@ -176,18 +187,50 @@ class GameOfLifeVC: UIViewController {
         viewGrid.setChessBoard()
 
     }
+    @IBAction func buttonXPressed(_ sender: UIButton) {
+        buttonResetPressed(buttonReset)
+        viewGrid.setXBoard()
+    }
     
     
     @IBAction func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
         
-        if(switchPlay.isOn){
-            
-        }
+        if(switchPlay.isOn){}
         else{
-            let rawPoint = sender.location(in: viewGrid)
-            viewGrid.pressAT(point: rawPoint)
+            viewGrid.pressAT(point: sender.location(in: viewGrid))
         }
         
+    }
+    // source
+    // https://www.raywenderlich.com/76020/using-uigesturerecognizer-with-swift-tutorial
+    // and https://blog.apoorvmote.com/uipangesturerecognizer-to-make-draggable-uiview-in-ios-swift/
+    @IBAction func panGestureRecognizer(_ sender: UIPanGestureRecognizer) {
+        print("2")
+        
+        if(switchPlay.isOn){}
+        else{
+            /*
+            let translation = sender.translation(in: viewGrid)
+            if let view = sender.view {
+                view.center = CGPoint(x:view.center.x + translation.x,
+                                      y:view.center.y + translation.y)
+            }
+            sender.setTranslation(CGPointZero, in: viewGrid)
+            */
+            if (sender.state == UIGestureRecognizerState.began){
+                pressedCellState = viewGrid.getCellState(point: sender.location(in: viewGrid))
+                
+            }
+            else if ((sender.state != UIGestureRecognizerState.ended) && (sender.state != UIGestureRecognizerState.failed)) {
+                
+                viewGrid.setCellAt(point: sender.location(in: viewGrid), toState: pressedCellState)
+                
+            }
+            else{
+                
+            }
+
+        }
     }
     
     
