@@ -29,6 +29,14 @@ class GameOfLifeVC: UIViewController {
     @IBOutlet weak var labelSize: UILabel!
     @IBOutlet weak var sliderSize: UISlider!
     @IBOutlet weak var labelSizeNumber: UILabel!
+    
+    @IBOutlet weak var labelExperimental: UILabel!
+    
+    @IBOutlet weak var buttonAlive: UIButton!
+    @IBOutlet weak var buttonChess: UIButton!
+    
+    @IBOutlet weak var labelInfo: UILabel!
+    
 
     @IBOutlet weak var tapGesture: UITapGestureRecognizer!
     
@@ -45,6 +53,7 @@ class GameOfLifeVC: UIViewController {
         labelGenerationNumber.textAlignment = NSTextAlignment.center;
         switchPlay.setOn(false, animated: false)
         
+        buttonReset.setTitle("Reset", for: .normal)
         buttonReset.setTitleColor(.blue, for: .normal)
         buttonReset.layer.cornerRadius = 5
         buttonReset.layer.borderWidth = 0.5
@@ -70,6 +79,34 @@ class GameOfLifeVC: UIViewController {
         labelSizeNumber.textAlignment = NSTextAlignment.center
         
         
+        // source
+        // https://stackoverflow.com/a/24356906
+        // and https://stackoverflow.com/a/27728516
+        let multiColorString: NSString = "~~ Game of Life ~~\nby Saleh Alghusson\n■ Alive. ■ Born. ■ Died. ■ Dead."
+        var coloredString = NSMutableAttributedString()
+
+        coloredString = NSMutableAttributedString(string: multiColorString as String, attributes: [NSFontAttributeName:UIFont(name: labelInfo.font.fontName, size: 17.0)!])
+        coloredString.addAttribute(NSForegroundColorAttributeName, value: viewGrid.getColor(cellState: .Alive), range: NSRange(location:38,length:1))
+        coloredString.addAttribute(NSForegroundColorAttributeName, value: viewGrid.getColor(cellState: .Born), range: NSRange(location:47,length:1))
+        coloredString.addAttribute(NSForegroundColorAttributeName, value: viewGrid.getColor(cellState: .Died), range: NSRange(location:55,length:1))
+        coloredString.addAttribute(NSForegroundColorAttributeName, value: viewGrid.getColor(cellState: .Empty), range: NSRange(location:63,length:1))
+        
+        labelInfo.attributedText = coloredString
+        
+        
+        labelExperimental.text = "Experimental:"
+        
+        buttonAlive.setTitle("  All Alive!  ", for: .normal)
+        buttonAlive.setTitleColor(.green, for: .normal)
+        buttonAlive.layer.cornerRadius = 5
+        buttonAlive.layer.borderWidth = 0.5
+        buttonAlive.layer.borderColor = UIColor.black.cgColor
+        
+        buttonChess.setTitle("  Chess  ", for: .normal)
+        buttonChess.setTitleColor(.green, for: .normal)
+        buttonChess.layer.cornerRadius = 5
+        buttonChess.layer.borderWidth = 0.5
+        buttonChess.layer.borderColor = UIColor.black.cgColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,6 +145,8 @@ class GameOfLifeVC: UIViewController {
     @IBAction func switchPlayPressed(_ sender: UISwitch) {
         play = switchPlay.isOn
         sliderSize.isEnabled = !play
+        buttonChess.isEnabled = !play
+        buttonAlive.isEnabled = !play
         if(play){
             timer = Timer.scheduledTimer(timeInterval: 1.0/Double(sliderFrames.value), target: self, selector: #selector(GameOfLifeVC.countUp), userInfo: nil, repeats: true)
         }
@@ -128,6 +167,16 @@ class GameOfLifeVC: UIViewController {
         labelGenerationNumber.text = "\(viewGrid.getGeneration())"
         labelSizeNumber.text = "\(viewGrid.getSize())"
     }
+    @IBAction func buttonAlivePressed(_ sender: UIButton) {
+        buttonResetPressed(buttonReset)
+        viewGrid.setAllCellsAlive()
+    }
+    @IBAction func buttonChessPressed(_ sender: UIButton) {
+        buttonResetPressed(buttonReset)
+        viewGrid.setChessBoard()
+
+    }
+    
     
     @IBAction func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
         
@@ -140,6 +189,8 @@ class GameOfLifeVC: UIViewController {
         }
         
     }
+    
+    
 
 }
 

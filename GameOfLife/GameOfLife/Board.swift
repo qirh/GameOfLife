@@ -12,7 +12,7 @@ import UIKit
 //a lot of the structure of this model was copied from the helper code provided by the instructor of this course
 typealias CellPoint = (col: Int, row: Int)
 
-enum CellState {
+enum CellState  {
     case Alive
     case Born   //just lived this generation
     
@@ -44,8 +44,10 @@ class Board: LifeDataSource{
     private var previousGrid: [[CellState]]
     private var grid: [[CellState]]
     
-    let MAXSIZE = 100
-    let MINSIZE = 5
+    private let colors: [CellState: UIColor]  = [.Alive: UIColor.green, .Born: UIColor.cyan, .Died: UIColor.orange, .Empty: UIColor.black]
+    
+    let MAXSIZE = 70
+    let MINSIZE = 8
     
     init(generationInput: Int = 0, size sizeInput: Int, defaultState: CellState = .Empty){
         generation = generationInput
@@ -92,24 +94,39 @@ class Board: LifeDataSource{
         grid.removeAll()
     }
     func pressedCell(point: CellPoint) {
+        if( grid[point.col][point.row] == .Alive || grid[point.col][point.row] == .Born ){
+            grid[point.col][point.row] = .Died
+        }
+        else{
+            grid[point.col][point.row] = .Born
+        }
         
-        grid[point.col][point.row] = .Alive
     }
-
     func cellStateAt(point: CellPoint) -> CellState {
         return grid[point.col][point.row]
     }
-    
     func setCellAt(point: CellPoint, toState: CellState) {
         grid[point.col][point.row] = toState
     }
     func setAllCells(toState: CellState) {
-        for i in 0...size{
-            for j in 0...size{
+        for i in 0..<size{
+            for j in 0..<size{
+                print("i = \(i). j = \(j)")
                 grid[i][j] = toState
             }
         }
-
+    }
+    func setChess() {
+        for i in 0..<size{
+            for j in 0..<size{
+                if(j%2 == 0 && i%2 == 0){
+                    grid[i][j] = .Born
+                }
+                else if(j%2 == 1 && i%2 == 1){
+                    grid[i][j] = .Born
+                }
+            }
+        }
     }
     func getStates() -> [CellState]{
         var states = [CellState]()
@@ -146,11 +163,10 @@ class Board: LifeDataSource{
                 }
                 else{
                     if(neighborCount == 3){
-                        
                         grid[i][j] = .Born
                     }
                     else{
-                        
+                        grid[i][j] = .Empty
                     }
                 }
             }
@@ -169,18 +185,20 @@ class Board: LifeDataSource{
     func getGeneration() -> Int {
         return generation
     }
-    func setGeneration(generation: Int) {
+    private func setGeneration(generation: Int) {
         self.generation = generation
     }
-    func increaseGeneration(by: Int = 1) {
+    private func increaseGeneration(by: Int = 1) {
         self.generation += by
     }
-    func copyGrid(){
-        
+    private func copyGrid(){
         for i in 0..<size{
             for j in 0..<size{
                 previousGrid[i][j] = grid[i][j]
             }
         }
+    }
+    func getColor(cellState: CellState) -> UIColor {
+        return colors[cellState]!
     }
 }
