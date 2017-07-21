@@ -41,15 +41,11 @@ class GridView: UIView {
     }
     func drawHelper(){
         if(first){
-            print("first")
             drawGrid()
         }
         else if(!board.compareBoards()){
-            print("draw")
+            
             drawGrid()
-        }
-        else{
-            print("skip")
         }
         first = false
     }
