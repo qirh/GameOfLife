@@ -50,7 +50,7 @@ class GridView: UIView {
         first = false
     }
     
-    // a lot of credit goes to this answer on stack overflow
+    // src:
     // https://stackoverflow.com/a/34659468
     func drawGrid() {
         

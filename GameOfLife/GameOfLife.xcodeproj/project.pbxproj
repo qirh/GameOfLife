@@ -205,6 +205,7 @@
 				TargetAttributes = {
 					303C80BA1F1C40D900B7C0AB = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = TLN7TR76QL;
 						ProvisioningStyle = Automatic;
 					};
 					303C80CE1F1C40D900B7C0AB = {
@@ -430,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TLN7TR76QL;
 				INFOPLIST_FILE = GameOfLife/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.harvard.csci-s65.GameOfLife";
@@ -442,6 +444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TLN7TR76QL;
 				INFOPLIST_FILE = GameOfLife/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.harvard.csci-s65.GameOfLife";
