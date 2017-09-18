@@ -1,3 +1,6 @@
+[![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/harvard-ios/assignment-5-almto3/master/LICENSE.txt)
+* License: MIT License
+
 ## Notes:
 	As far as I know, I have implemented everything except:
 		* Not sure if this statement is true for my code "The Model/View/Controller pattern shown in the sample code must be followed".
