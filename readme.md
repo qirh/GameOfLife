@@ -1,24 +1,18 @@
 [![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/harvard-ios/assignment-5-almto3/master/LICENSE.txt)
 * License: MIT License
 
+# Conway's Game of Life
+	just a small project that I worked on while learning iOS and Swift.
+
 ## Notes:
 	As far as I know, I have implemented everything except:
-		* Not sure if this statement is true for my code "The Model/View/Controller pattern shown in the sample code must be followed".
-		* Not sure if this statement is true for my code "To implement the cells, you must override drawRect and use UIBezierPath drawn shapes and not internal UIViews".
+		* Not sure if this code is an example of MVC, I need to look that up.
+		* Added three experimental configurations in the shape of buttons.
+		* Variable board size from 8 until 70. (Arbitrary values).
 
 ## Known Bugs:
-		Nothing as of now.
-		Lag when simulation goes on for a while.
+		* It does get a bit laggy when the simulation runs for a while, I think it has something to do with how I handle drawing, since it probably is just drawing over the canvas over and over.
 
-## Extras (* = done, ** = not done):
-		* Added three experimental configurations in the shape of buttons.
-		** Force touch, still working on it
-
-## Graduate Credit (* = done, ** = not done):
-		* Variable size from 8 until 70. (Arbitrary values).
-
-## Insane (* = done, ** = working on it):
-		I started working on optimization and improved the speed of my program significantly, however, it is still hogging memory. these are the improvements that I wanted to work on, but couldn't do them in time:
-			** Implement a landscape orientation as well.
-			** Look up NSCoder, use it to persist the current state of your simulation to disk, and bring it back on startup.
-			** Optimize calculation by avoiding recalculation of dead zones.
+## To be Added (Ojalá):
+		* Force touch, still working on it.
+		* Landscape orientation.
