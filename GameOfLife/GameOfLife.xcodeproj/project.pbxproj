@@ -15,7 +15,6 @@
 		303C80D41F1C40D900B7C0AB /* GameOfLifeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303C80D31F1C40D900B7C0AB /* GameOfLifeTests.swift */; };
 		303C80DF1F1C40D900B7C0AB /* GameOfLifeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303C80DE1F1C40D900B7C0AB /* GameOfLifeUITests.swift */; };
 		305ECB851F1FEE4200913B26 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ECB841F1FEE4200913B26 /* GridView.swift */; };
-		30AE628D1F1F157600425FC0 /* HelperCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AE628C1F1F157600425FC0 /* HelperCode.swift */; };
 		30AE628F1F1F15A600425FC0 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AE628E1F1F15A600425FC0 /* Board.swift */; };
 		30CBA67D1F21A1A600FFB645 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CBA67C1F21A1A600FFB645 /* Util.swift */; };
 /* End PBXBuildFile section */
@@ -52,7 +51,6 @@
 		303C80DE1F1C40D900B7C0AB /* GameOfLifeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeUITests.swift; sourceTree = "<group>"; };
 		303C80E01F1C40D900B7C0AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		305ECB841F1FEE4200913B26 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		30AE628C1F1F157600425FC0 /* HelperCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperCode.swift; sourceTree = "<group>"; };
 		30AE628E1F1F15A600425FC0 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		30CBA67C1F21A1A600FFB645 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +103,6 @@
 		303C80BD1F1C40D900B7C0AB /* GameOfLife */ = {
 			isa = PBXGroup;
 			children = (
-				30AE628C1F1F157600425FC0 /* HelperCode.swift */,
 				303C80BE1F1C40D900B7C0AB /* AppDelegate.swift */,
 				303C80C01F1C40D900B7C0AB /* GameOfLifeVC.swift */,
 				303C80C21F1C40D900B7C0AB /* Main.storyboard */,
@@ -277,7 +274,6 @@
 				303C80BF1F1C40D900B7C0AB /* AppDelegate.swift in Sources */,
 				30AE628F1F1F15A600425FC0 /* Board.swift in Sources */,
 				305ECB851F1FEE4200913B26 /* GridView.swift in Sources */,
-				30AE628D1F1F157600425FC0 /* HelperCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
