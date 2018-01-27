@@ -1,4 +1,4 @@
-[![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/harvard-ios/assignment-5-almto3/master/LICENSE.txt)
+[![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/qirh/gameoflife/master/LICENSE)
 * License: MIT License
 
 # Conway's Game of Life
