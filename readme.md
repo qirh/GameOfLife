@@ -1,7 +1,4 @@
-[![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/qirh/gameoflife/master/LICENSE)
-* License: MIT License
-
-# Conway's Game of Life
+# Conway's Game of Life [![MIT license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/qirh/gameoflife/master/LICENSE)
 	A small project that I worked on while learning iOS and Swift. Has drawing and threads.
 
 ## Notes:
